@@ -4,7 +4,7 @@ class LinkedList<T> {
     public Node<T> head;
     public Node<T> tail;
 
-    public void add(T data) {
+    public void push(T data) {
         Node<T> node = new Node<>(data);
         if (head == null) {
             head = node;
@@ -12,6 +12,16 @@ class LinkedList<T> {
         } else {
             node.setNext(head);
             head = node;
+        }
+    }
+    public void add(T data){
+        Node<T> newnode=new Node<>(data);
+        if (head==null) {
+            head = newnode;
+            tail = newnode;
+        }else {
+            tail.setNext(newnode);
+            tail=newnode;
         }
     }
     public void print(){
@@ -37,5 +47,4 @@ class LinkedList<T> {
                 '}';
     }
 }
-
 

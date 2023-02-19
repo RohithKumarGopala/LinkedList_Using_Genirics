@@ -9,5 +9,12 @@ public class LinkedListMain {
         list.add(56);
         list.print();
 
+        LinkedList<Integer>list1=new LinkedList<>();
+        list1.add(56);
+        list1.add(30);
+        list1.add(70);
+        list1.print();
+
+
     }
 }
