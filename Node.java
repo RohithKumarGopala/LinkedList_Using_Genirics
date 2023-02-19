@@ -1,27 +1,27 @@
 package linkedlsitUsingGenirics;
 
-public class Node <T>{
-    private T data;
+public class Node <H>{
+    private H data;
 
-    public Node(T data) {
+    public Node(H data) {
         this.data = data;
     }
 
-    private Node <T> next;
+    private Node <H> next;
 
-    public T getData() {
+    public H getData() {
         return data;
     }
 
-    public void setData(T data) {
+    public void setData(H data) {
         this.data = data;
     }
 
-    public Node<T> getNext() {
+    public Node<H> getNext() {
         return next;
     }
 
-    public void setNext(Node<T> next) {
+    public void setNext(Node<H> next) {
         this.next = next;
     }
 }

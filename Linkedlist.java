@@ -1,97 +1,70 @@
 package linkedlsitUsingGenirics;
 
 class LinkedList<T> {
-    public Node<T> head;
-    public Node<T> tail;
+    Node head;
 
-    public void append(T data) {
-        Node<T> node = new Node<>(data);
-        if (head == null) {
-            head = node;
-            tail = node;
-        } else {
-            node.setNext(head);
-            head = node;
+    class Node
+    {
+        int data;
+        Node next;
+
+        Node (int x)		// parameterized constructor
+        {
+            data = x;
+            next = null;
         }
     }
+    //searchNode() will search for a given node in the list
+    public void searchInTheNode (int data)
+    {
+        Node current = head;
+        int i = 1;
+        boolean flag = false;
 
-    public void add(T data) {
-        Node<T> newnode = new Node<>(data);
-        if (head == null) {
-            head = newnode;
-            tail = newnode;
-        } else {
-            tail.setNext(newnode);
-            tail = newnode;
+        //Checks whether list is empty
+        if (head == null)
+        {
+            System.out.println ("List is empty");
         }
-    }
-
-    public Node<T> search(T searchData) {
-        Node<T> temp = head;
-        while (temp != null) {
-            if (temp.getData().equals(searchData))
-                return temp;
-            temp = (Node<T>) temp.getNext();
-        }
-        return null;
-    }
-
-    public boolean searchAndInsert(T searchData, T insertData) {
-        Node<T> newNode = new Node(insertData);
-        Node<T> searchedNode = search(searchData);
-        if (searchedNode == null)
-            return false;
-        else {
-            newNode.setNext(searchedNode.getNext());
-            searchedNode.setNext(newNode);
-            return true;
-        }
-
-    }
-
-    public void popFirst() {
-        if (head == null) {
-            System.out.println("Linked List is Empty");
-        } else {
-            T data = head.getData();
-            head = (Node<T>) head.getNext();
-            System.out.println(data);
-        }
-    }
-    public void popLast() {
-        if (head == null) {
-            System.out.println("Linked List is Empty");
-        } else {
-            Node<T> temp = head;
-            while (temp.getNext() != tail) {
-                temp = (Node<T>) temp.getNext();
+        else
+        {
+            while (current != null)
+            {
+                //Compares node to be found with each node present in the list
+                if (current.data == data)
+                {
+                    flag = true;
+                    break;
+                }
+                i++;
+                current = current.next;
             }
-            T data = tail.getData();
-            temp.setNext(null);
-            tail = temp;
-            System.out.println(data);
         }
-    }
-    public void print(){
-        if (head==null){
-            System.out.println("Linked List is Empty");
-        }else {
-            Node<T> temp = head;
-            while (temp != null) {
-                System.out.print(temp.getData()+" ");
-                temp = (Node<T>) temp.getNext();
-            }
-            System.out.println();
-        }
-    }
-    public boolean isEmpty(){
-        return head==null ? true:false;
+        if (flag)
+            System.out.println ("Element that you have given is present in the node : " + i);
+        else
+            System.out.println ("Element is not present in the above given list");
     }
 
-    @Override
-    public String toString() {
-        return "LinkedList{" +
-                "head=" + head +
-                '}';
+    public Node insertInTheNode (int data)
+    {
+        Node newNode = new Node (data);
+        newNode.next = head;
+        head = newNode;
+
+        return head;
     }
+
+    public void print ()
+    {
+        Node node = head;
+        while (node != null)
+        {
+            System.out.print (node.data + " ");
+            node = node.next;
+        }
+        System.out.println ("\n");
+    }
+
 }
+
