@@ -46,6 +46,15 @@ class LinkedList<T> {
         }
 
     }
+    public T pop(){
+        if (head==null) {
+            return null;
+        }else {
+            T data=head.getData();
+            head=(Node<T>) head.getNext();
+            return data;
+        }
+    }
     public void print(){
         if (head==null){
             System.out.println("List is Empty");
