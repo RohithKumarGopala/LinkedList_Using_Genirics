@@ -1,98 +1,61 @@
 package linkedlsitUsingGenirics;
 
 class LinkedList<H> {
-    public Node<H> head;
-    public Node<H> tail;
+    Node head; // head of list
 
-    public void append(H data) {
-        Node<H> node = new Node<>(data);
-        if (head == null) {
-            head = node;
-            tail = node;
-        } else {
-            node.setNext(head);
-            head = node;
+    class Node {
+        int data;
+        Node next;
+
+        Node(int d) {
+            data = d;
+            next = null;
         }
     }
 
-    public void add(H data) {
-        Node<H> newnode = new Node<>(data);
-        if (head == null) {
-            head = newnode;
-            tail = newnode;
-        } else {
-            tail.setNext(newnode);
-            tail = newnode;
-        }
+    public void append(int new_data) {
+
+        Node new_node = new Node(new_data);
+
+        new_node.next = head;
+
+        head = new_node;
     }
 
-    public Node<H> search(H searchData) {
-        Node<H> temp = head;
-        while (temp != null) {
-            if (temp.getData().equals(searchData))
-                return temp;
-            temp = (Node<H>) temp.getNext();
-        }
-        return null;
-    }
+    void deletetheNode(int position) {
+        if (head == null)
+            return;
 
-    public boolean searchAndInsert(H searchData, H insertData) {
-        Node<H> newNode = new Node(insertData);
-        Node<H> searchedNode = search(searchData);
-        if (searchedNode == null)
-            return false;
-        else {
-            newNode.setNext(searchedNode.getNext());
-            searchedNode.setNext(newNode);
-            return true;
+        Node temp = head;
+
+
+        if (position == 0) {
+            head = temp.next;
+            return;
         }
 
+        for (int i = 0; temp != null && i < position - 1;
+             i++)
+            temp = temp.next;
+
+
+        if (temp == null || temp.next == null)
+            return;
+
+
+        Node next = temp.next.next;
+
+        temp.next
+                = next;
     }
 
-    public void popFirst() {
-        if (head == null) {
-            System.out.println("Linked List is Empty");
-        } else {
-            H data = head.getData();
-            head = (Node<H>) head.getNext();
-            System.out.println(data);
+    public void printtheList() {
+        Node tnode = head;
+        while (tnode != null) {
+            System.out.print(tnode.data + " ");
+            tnode = tnode.next;
         }
-    }
-    public void popLast() {
-        if (head == null) {
-            System.out.println("Linked List is Empty");
-        } else {
-            Node<H> temp = head;
-            while (temp.getNext() != tail) {
-                temp = (Node<H>) temp.getNext();
-            }
-            H data = tail.getData();
-            temp.setNext(null);
-            tail = temp;
-            System.out.println(data);
-        }
-    }
-    public void print(){
-        if (head==null){
-            System.out.println("Linked List is Empty");
-        }else {
-            Node<H> temp = head;
-            while (temp != null) {
-                System.out.print(temp.getData()+" ");
-                temp = (Node<H>) temp.getNext();
-            }
-            System.out.println();
-        }
-    }
-    public boolean isEmpty(){
-        return head==null ? true:false;
-    }
-
-    @Override
-    public String toString() {
-        return "LinkedList{" +
-                "head=" + head +
-                '}';
     }
 }
+
 
