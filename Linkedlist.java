@@ -4,7 +4,7 @@ class LinkedList<T> {
     public Node<T> head;
     public Node<T> tail;
 
-    public void push(T data) {
+    public void append(T data) {
         Node<T> node = new Node<>(data);
         if (head == null) {
             head = node;
@@ -23,6 +23,28 @@ class LinkedList<T> {
             tail.setNext(newnode);
             tail=newnode;
         }
+    }
+    public Node<T> search(T searchData) {
+        Node<T> temp = head;
+        while (temp != null) {
+            if (temp.getData().equals(searchData))
+                return temp;
+            temp = (Node<T>) temp.getNext();
+        }
+        return null;
+    }
+
+    public boolean searchAndInsert(T searchData, T insertData) {
+        Node<T> newNode = new Node(insertData);
+        Node<T> searchedNode = search(searchData);
+        if (searchedNode == null)
+            return false;
+        else {
+            newNode.setNext(searchedNode.getNext());
+            searchedNode.setNext(newNode);
+            return true;
+        }
+
     }
     public void print(){
         if (head==null){
@@ -47,4 +69,3 @@ class LinkedList<T> {
                 '}';
     }
 }
-
