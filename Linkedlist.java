@@ -1,70 +1,98 @@
 package linkedlsitUsingGenirics;
 
-class LinkedList<T> {
-    Node head;
+class LinkedList<H> {
+    public Node<H> head;
+    public Node<H> tail;
 
-    class Node
-    {
-        int data;
-        Node next;
-
-        Node (int x)		// parameterized constructor
-        {
-            data = x;
-            next = null;
+    public void append(H data) {
+        Node<H> node = new Node<>(data);
+        if (head == null) {
+            head = node;
+            tail = node;
+        } else {
+            node.setNext(head);
+            head = node;
         }
     }
-    //searchNode() will search for a given node in the list
-    public void searchInTheNode (int data)
-    {
-        Node current = head;
-        int i = 1;
-        boolean flag = false;
 
-        //Checks whether list is empty
-        if (head == null)
-        {
-            System.out.println ("List is empty");
+    public void add(H data) {
+        Node<H> newnode = new Node<>(data);
+        if (head == null) {
+            head = newnode;
+            tail = newnode;
+        } else {
+            tail.setNext(newnode);
+            tail = newnode;
         }
-        else
-        {
-            while (current != null)
-            {
-                //Compares node to be found with each node present in the list
-                if (current.data == data)
-                {
-                    flag = true;
-                    break;
-                }
-                i++;
-                current = current.next;
+    }
+
+    public Node<H> search(H searchData) {
+        Node<H> temp = head;
+        while (temp != null) {
+            if (temp.getData().equals(searchData))
+                return temp;
+            temp = (Node<H>) temp.getNext();
+        }
+        return null;
+    }
+
+    public boolean searchAndInsert(H searchData, H insertData) {
+        Node<H> newNode = new Node(insertData);
+        Node<H> searchedNode = search(searchData);
+        if (searchedNode == null)
+            return false;
+        else {
+            newNode.setNext(searchedNode.getNext());
+            searchedNode.setNext(newNode);
+            return true;
+        }
+
+    }
+
+    public void popFirst() {
+        if (head == null) {
+            System.out.println("Linked List is Empty");
+        } else {
+            H data = head.getData();
+            head = (Node<H>) head.getNext();
+            System.out.println(data);
+        }
+    }
+    public void popLast() {
+        if (head == null) {
+            System.out.println("Linked List is Empty");
+        } else {
+            Node<H> temp = head;
+            while (temp.getNext() != tail) {
+                temp = (Node<H>) temp.getNext();
             }
+            H data = tail.getData();
+            temp.setNext(null);
+            tail = temp;
+            System.out.println(data);
         }
-        if (flag)
-            System.out.println ("Element that you have given is present in the node : " + i);
-        else
-            System.out.println ("Element is not present in the above given list");
     }
-
-    public Node insertInTheNode (int data)
-    {
-        Node newNode = new Node (data);
-        newNode.next = head;
-        head = newNode;
-
-        return head;
-    }
-
-    public void print ()
-    {
-        Node node = head;
-        while (node != null)
-        {
-            System.out.print (node.data + " ");
-            node = node.next;
+    public void print(){
+        if (head==null){
+            System.out.println("Linked List is Empty");
+        }else {
+            Node<H> temp = head;
+            while (temp != null) {
+                System.out.print(temp.getData()+" ");
+                temp = (Node<H>) temp.getNext();
+            }
+            System.out.println();
         }
-        System.out.println ("\n");
+    }
+    public boolean isEmpty(){
+        return head==null ? true:false;
     }
 
+    @Override
+    public String toString() {
+        return "LinkedList{" +
+                "head=" + head +
+                '}';
+    }
 }
 
